@@ -1,14 +1,16 @@
 package com.jjkay03.ninjagomc
 
+import com.jjkay03.ninjagomc.commands.NinjagoMCCommand
 import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
-import java.util.logging.Logger
 
 class NinjagoMC : JavaPlugin() {
     companion object {
-        lateinit var instance: NinjagoMC // Define a companion object to hold the instance
+        lateinit var instance: NinjagoMC; private set // Define a companion object to hold the instance
+        lateinit var PLAYERDATAFOLDER: File; private set
+        var PREFIX: String = "[NinjagoMC]"; private set
     }
 
     // Plugin startup logic
@@ -32,10 +34,13 @@ class NinjagoMC : JavaPlugin() {
         reloadConfig() // Reload the configuration
 
         // Create default folders
-        val playerDataFolder = File(dataFolder, "player_data"); if (!playerDataFolder.exists()) {playerDataFolder.mkdirs()}
+        PLAYERDATAFOLDER = File(dataFolder, "player_data"); if (!PLAYERDATAFOLDER.exists()) {PLAYERDATAFOLDER.mkdirs()}
 
         // Get config settings
-        val prefix = config.getString("prefix") ?: ""
+        PREFIX = config.getString("prefix") ?: ""
+
+        // Get Commands
+        getCommand("ninjagomc")?.setExecutor(NinjagoMCCommand())
 
     }
 
