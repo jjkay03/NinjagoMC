@@ -20,10 +20,12 @@ class NinjagoMC : JavaPlugin() {
 
         // Plugin welcome message
         console.sendMessage("")
-        console.sendMessage("§a┌-----------------------------┐")
-        console.sendMessage("§a|          NINJAGOMC          |")
-        console.sendMessage("§a|         IS RUNNING!         |")
-        console.sendMessage("§a└-----------------------------┘")
+        console.sendMessage("§a      __ _        _                             ___")
+        console.sendMessage("§a   /\\ \\ (_)_ __  (_) __ _  __ _  ___   /\\/\\    / __\\")
+        console.sendMessage("§a  /  \\/ / | '_ \\ | |/ _` |/ _` |/ _ \\ /    \\  / /")
+        console.sendMessage("§a / /\\  /| | | | || | (_| | (_| | (_) / /\\/\\ \\/ /___")
+        console.sendMessage("§a \\_\\ \\/ |_|_| |_|/ |\\__,_|\\__, |\\___/\\/    \\/\\____/")
+        console.sendMessage("§a               |__/       |___/")
         console.sendMessage("")
 
         // Display plugin version
