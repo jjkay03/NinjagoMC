@@ -3,6 +3,7 @@ package com.jjkay03.ninjagomc
 import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.plugin.java.JavaPlugin
+import java.io.File
 import java.util.logging.Logger
 
 class NinjagoMC : JavaPlugin() {
@@ -25,6 +26,16 @@ class NinjagoMC : JavaPlugin() {
 
         // Display plugin version
         logger.info("Plugin version: ${description.version}")
+
+        // Config stuff
+        saveDefaultConfig() // Save the default configuration if it doesn't exist
+        reloadConfig() // Reload the configuration
+
+        // Create default folders
+        val playerDataFolder = File(dataFolder, "player_data"); if (!playerDataFolder.exists()) {playerDataFolder.mkdirs()}
+
+        // Get config settings
+        val prefix = config.getString("prefix") ?: ""
 
     }
 
