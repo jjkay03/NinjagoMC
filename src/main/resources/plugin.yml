@@ -1,0 +1,8 @@
+name: NinjagoMC
+version: '${project.version}'
+main: com.jjkay03.ninjagomc.NinjagoMC
+api-version: '1.20'
+prefix: NinjagoMC
+authors: [jjkay03]
+description: Ninjago elemantal powers in Minecraft
+website: https://jjkay03.com/
