@@ -15,6 +15,19 @@ class PlayerData: Listener {
         const val ELEMENTS_LIST_KEY = "elements-list"
         private val DEFAULT_LIST_NULL_KEYS_LIST = listOf(ELEMENTS_LIST_KEY)
         private val DEFAULT_NULL_KEYS_LIST = listOf("exemple-key", "exemple-key")
+
+        // Returns all elements a player has
+        fun readElementsList(player: Player): List<String> {
+            val uuid = player.uniqueId
+            val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+
+            if (playerFile.exists()) {
+                val config = YamlConfiguration.loadConfiguration(playerFile)
+                return config.getStringList(ELEMENTS_LIST_KEY)
+            }
+
+            return emptyList()
+        }
     }
 
     @EventHandler

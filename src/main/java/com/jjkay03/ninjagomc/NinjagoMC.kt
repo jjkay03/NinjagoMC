@@ -1,5 +1,7 @@
 package com.jjkay03.ninjagomc
 
+import com.jjkay03.ninjagomc.commands.ElementsCommand
+import com.jjkay03.ninjagomc.commands.ElementsListCommand
 import com.jjkay03.ninjagomc.commands.NinjagoMCCommand
 import com.jjkay03.ninjagomc.utility.PlayerData
 import org.bukkit.Bukkit
@@ -44,6 +46,8 @@ class NinjagoMC : JavaPlugin() {
 
         // Get Commands
         getCommand("ninjagomc")?.setExecutor(NinjagoMCCommand())
+        getCommand("elements")?.setExecutor(ElementsCommand())
+        getCommand("elementslist")?.setExecutor(ElementsListCommand())
 
         // Register event handler
         server.pluginManager.registerEvents(PlayerData(), this)

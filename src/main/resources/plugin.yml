@@ -12,4 +12,12 @@ commands:
   ninjagomc:
     description: "Test if the plugin is running."
     permission: ninjagomc.command.admin
-    permission-message: "You do not have permission to use this command"
+    permission-message: "You don't have permission to use this command!"
+  elements:
+    description: "List your elements"
+    permission: ninjagomc.command.elements
+    permission-message: "You don't have permission to use this command!"
+  elementslist:
+    description: "List all available elements"
+    permission: ninjagomc.command.elementslist
+    permission-message: "You don't have permission to use this command!"
