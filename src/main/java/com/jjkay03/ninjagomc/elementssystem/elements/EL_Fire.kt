@@ -22,13 +22,15 @@ class EL_Fire : Listener {
         .force(true)
         .allPlayers()
 
-    // Set entity on fire ability
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
 
         // Check if player has element
         if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (player.inventory.heldItemSlot != 0) { return }
 
         // Play the flint and steel sound
         player.world.playSound(player.location, Sound.ITEM_FLINTANDSTEEL_USE, 1.0f, 1.0f)
@@ -47,6 +49,9 @@ class EL_Fire : Listener {
 
         // Check if player has element
         if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (player.inventory.heldItemSlot != 0) { return }
 
         // Check if the action is a right-click on a block
         if (event.action == Action.RIGHT_CLICK_BLOCK) {
