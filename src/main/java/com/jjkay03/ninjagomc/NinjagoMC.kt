@@ -3,6 +3,8 @@ package com.jjkay03.ninjagomc
 import com.jjkay03.ninjagomc.commands.ElementsCommand
 import com.jjkay03.ninjagomc.commands.ElementsListCommand
 import com.jjkay03.ninjagomc.commands.NinjagoMCCommand
+import com.jjkay03.ninjagomc.commands.SetElementsCommand
+import com.jjkay03.ninjagomc.elementssystem.elements.EL_Fire
 import com.jjkay03.ninjagomc.utility.PlayerData
 import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
@@ -48,9 +50,12 @@ class NinjagoMC : JavaPlugin() {
         getCommand("ninjagomc")?.setExecutor(NinjagoMCCommand())
         getCommand("elements")?.setExecutor(ElementsCommand())
         getCommand("elementslist")?.setExecutor(ElementsListCommand())
+        getCommand("setelements")?.setExecutor(SetElementsCommand())
+        getCommand("setelements")?.tabCompleter = SetElementsCommand() // Tab completer
 
         // Register event handler
         server.pluginManager.registerEvents(PlayerData(), this)
+        server.pluginManager.registerEvents(EL_Fire(), this)
 
     }
 

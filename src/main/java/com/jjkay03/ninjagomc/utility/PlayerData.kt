@@ -1,13 +1,17 @@
 package com.jjkay03.ninjagomc.utility
 
+import com.google.common.cache.CacheBuilder
 import com.jjkay03.ninjagomc.NinjagoMC
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
+import com.google.common.cache.Cache
 import java.io.File
 import java.io.IOException
+import java.time.Duration
+import java.util.UUID
 
 class PlayerData: Listener {
 
@@ -28,6 +32,12 @@ class PlayerData: Listener {
 
             return emptyList()
         }
+
+        val playerDataCache : Cache<UUID, NinjagoPlayer> = CacheBuilder.newBuilder()
+            .expireAfterWrite(Duration.ofSeconds(30))
+            .concurrencyLevel(8)
+            .initialCapacity(10)
+            .build<UUID, NinjagoPlayer>()
     }
 
     @EventHandler
