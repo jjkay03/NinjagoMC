@@ -159,12 +159,11 @@ class PlayerData: Listener {
 
         if (playerFile.exists()) {
             val config = YamlConfiguration.loadConfiguration(playerFile)
-            val hotkeyListKey = "hotkey-list"
-            val defaultHotkeyList = List(9) { mapOf("element" to null, "attack" to null) }
+            val defaultHotkeyList = List(9) { mapOf("element" to null, "ability" to null) }
 
             // Check if the hotkey list doesn't exist or is empty
-            if (!config.contains(hotkeyListKey) || (config.getList(hotkeyListKey) as? List<*>).isNullOrEmpty()) {
-                config.set(hotkeyListKey, defaultHotkeyList)
+            if (!config.contains(HOTKEY_LIST_KEY) || (config.getList(HOTKEY_LIST_KEY) as? List<*>).isNullOrEmpty()) {
+                config.set(HOTKEY_LIST_KEY, defaultHotkeyList)
                 try {
                     config.save(playerFile)
                 } catch (e: IOException) {

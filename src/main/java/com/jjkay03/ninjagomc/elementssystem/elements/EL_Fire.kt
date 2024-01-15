@@ -22,7 +22,7 @@ class EL_Fire : Listener {
         .force(true)
         .allPlayers()
 
-    // Put entities on fire ability
+    // Ability 1: Put entities on fire ability
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
@@ -44,7 +44,7 @@ class EL_Fire : Listener {
         entity.fireTicks = 100
     }
 
-    // Flint and steel hand ability
+    // Ability 1: Flint and steel hand ability
     @EventHandler
     fun onRightClickBlock(event: PlayerInteractEvent) {
         val player = event.player
