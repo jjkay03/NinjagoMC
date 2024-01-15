@@ -47,7 +47,7 @@ class PlayerData: Listener {
         createPlayerYamlFile(player) // Create player data
         updateLastAccountNameKey(player)
         updateDefaultListNullKeys(player, DEFAULT_LIST_NULL_KEYS_LIST)
-        createDefaultHotkeyList(player) // Create default hotkey list
+        //createDefaultHotkeyList(player) // Create default hotkey list
     }
 
     // Create YAML files for players based on UUID if they don't exist
@@ -159,11 +159,13 @@ class PlayerData: Listener {
 
         if (playerFile.exists()) {
             val config = YamlConfiguration.loadConfiguration(playerFile)
-            val defaultHotkeyList = List(9) { mapOf("element" to null, "ability" to null) }
 
             // Check if the hotkey list doesn't exist or is empty
-            if (!config.contains(HOTKEY_LIST_KEY) || (config.getList(HOTKEY_LIST_KEY) as? List<*>).isNullOrEmpty()) {
-                config.set(HOTKEY_LIST_KEY, defaultHotkeyList)
+            if (!config.contains(HOTKEY_LIST_KEY)) {
+                for (i in 0..8) {
+                    config.set("$HOTKEY_LIST_KEY.$i.element", null)
+                    config.set("$HOTKEY_LIST_KEY.$i.ability", null)
+                }
                 try {
                     config.save(playerFile)
                 } catch (e: IOException) {

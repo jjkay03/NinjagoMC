@@ -8,12 +8,11 @@ import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
 
-class EL_Fire : Listener {
+class EL_Fire : BaseElement() {
 
     private val baseFireAttackParticles = ParticleBuilder(Particle.FLAME)
         .count(10)
@@ -31,7 +30,7 @@ class EL_Fire : Listener {
         if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
 
         // Check if the first slot of the hotbar is selected
-        if (player.inventory.heldItemSlot != 0) { return }
+        if (!isHotkeySelected(player, ElementsID.FIRE, 1)) { return }
 
         // Play the flint and steel sound
         player.world.playSound(player.location, Sound.ITEM_FLINTANDSTEEL_USE, 1.0f, 1.0f)
@@ -53,7 +52,7 @@ class EL_Fire : Listener {
         if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
 
         // Check if the first slot of the hotbar is selected
-        if (player.inventory.heldItemSlot != 0) { return }
+        if (!isHotkeySelected(player, ElementsID.FIRE, 2)) { return }
 
         // Check if the action is a right-click on a block
         if (event.action == Action.RIGHT_CLICK_BLOCK) {
