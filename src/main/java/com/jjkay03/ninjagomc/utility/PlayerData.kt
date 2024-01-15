@@ -17,6 +17,7 @@ class PlayerData: Listener {
 
     companion object {
         const val ELEMENTS_LIST_KEY = "elements-list"
+        const val HOTKEY_LIST_KEY = "hotkey-list"
         private val DEFAULT_LIST_NULL_KEYS_LIST = listOf(ELEMENTS_LIST_KEY)
         private val DEFAULT_NULL_KEYS_LIST = listOf("exemple-key", "exemple-key")
 
@@ -46,6 +47,7 @@ class PlayerData: Listener {
         createPlayerYamlFile(player) // Create player data
         updateLastAccountNameKey(player)
         updateDefaultListNullKeys(player, DEFAULT_LIST_NULL_KEYS_LIST)
+        createDefaultHotkeyList(player) // Create default hotkey list
     }
 
     // Create YAML files for players based on UUID if they don't exist
@@ -141,6 +143,28 @@ class PlayerData: Listener {
 
             // Save the changes back to the file
             if (changesMade) {
+                try {
+                    config.save(playerFile)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    // Create default hotkey list for the player on join
+    private fun createDefaultHotkeyList(player: Player) {
+        val uuid = player.uniqueId
+        val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+
+        if (playerFile.exists()) {
+            val config = YamlConfiguration.loadConfiguration(playerFile)
+            val hotkeyListKey = "hotkey-list"
+            val defaultHotkeyList = List(9) { mapOf("element" to null, "attack" to null) }
+
+            // Check if the hotkey list doesn't exist or is empty
+            if (!config.contains(hotkeyListKey) || (config.getList(hotkeyListKey) as? List<*>).isNullOrEmpty()) {
+                config.set(hotkeyListKey, defaultHotkeyList)
                 try {
                     config.save(playerFile)
                 } catch (e: IOException) {

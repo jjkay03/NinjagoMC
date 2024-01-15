@@ -21,7 +21,7 @@ class NinjagoPlayer(val uuid : UUID, val name: String, val elements_list: Mutabl
             val ninjagoPlayerData = NinjagoPlayer(
                 uuid,
                 config.getString("last-account-name")?:"unknown",
-                config.getStringList("elements-list").map { ElementsID.valueOf(it) }.toMutableSet()
+                config.getStringList(PlayerData.ELEMENTS_LIST_KEY).map { ElementsID.valueOf(it) }.toMutableSet()
             )
 
             PlayerData.playerDataCache.put(uuid, ninjagoPlayerData)
@@ -42,7 +42,7 @@ class NinjagoPlayer(val uuid : UUID, val name: String, val elements_list: Mutabl
         }
         val config = YamlConfiguration.loadConfiguration(playerFile)
         config.set("last-account-name", name)
-        config.set("elements-list", elements_list.map { it.toString() })
+        config.set(PlayerData.ELEMENTS_LIST_KEY, elements_list.map { it.toString() })
         config.save(playerFile)
         PlayerData.playerDataCache.put(uuid, this)
     }
