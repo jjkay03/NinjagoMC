@@ -1,4 +1,4 @@
-![minecraft_title](https://github.com/jjkay03/NinjagoMC/assets/61110962/b5852aab-a5f8-4b45-9bbf-9aa5777786c4)
+![minecraft_title](https://github.com/jjkay03/NinjagoMC/assets/61110962/ce82cd47-f3ff-4cab-a34d-48bf7dfe7fd5)
 
 <br>
 
