@@ -35,7 +35,7 @@ class EL_Ice : BaseElement() {
 
         // Check cooldown and specify cooldown names and durations for the ability
         val cooldownName = "ice_ability_1"
-        val durationCooldown = 5000
+        val durationCooldown = 10
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
         // Play the flint and steel sound

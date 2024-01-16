@@ -21,12 +21,13 @@ open class BaseElement() : Listener{
     }
 
     // Check if the player is on cooldown for a specific ability
-    fun isOnCooldown(player: Player, cooldownName: String, durationCooldown: Int): Boolean {
+    fun isOnCooldown(player: Player, cooldownName: String, durationCooldownSeconds: Int): Boolean {
         val lastUsage = abilityCooldowns[player.uniqueId.toString() + cooldownName] ?: 0
         val currentTime = System.currentTimeMillis()
 
-        val remainingCooldown = (lastUsage + durationCooldown - currentTime) / 1000
-        val onCooldown = currentTime - lastUsage < durationCooldown
+        val durationCooldownMillis = durationCooldownSeconds * 500L
+        val remainingCooldown = (lastUsage + durationCooldownMillis - currentTime) / 1000
+        val onCooldown = currentTime - lastUsage < durationCooldownMillis
 
         if (onCooldown) {
             // Send cooldown message to the player with remaining time
@@ -37,7 +38,8 @@ open class BaseElement() : Listener{
     }
 
     // Update the cooldown for the player for a specific ability
-    fun updateCooldown(player: Player, cooldownName: String, durationCooldown: Int) {
-        abilityCooldowns[player.uniqueId.toString() + cooldownName] = System.currentTimeMillis() + durationCooldown
+    fun updateCooldown(player: Player, cooldownName: String, durationCooldownSeconds: Int) {
+        val durationCooldownMillis = durationCooldownSeconds * 500L
+        abilityCooldowns[player.uniqueId.toString() + cooldownName] = System.currentTimeMillis() + durationCooldownMillis
     }
 }
