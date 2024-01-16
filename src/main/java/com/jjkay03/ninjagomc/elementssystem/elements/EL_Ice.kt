@@ -1,8 +1,9 @@
 package com.jjkay03.ninjagomc.elementssystem.elements
 
 import com.destroystokyo.paper.ParticleBuilder
+import com.jjkay03.ninjagomc.elementssystem.AbilitiesID
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
-import com.jjkay03.ninjagomc.elementssystem.ElementsUtils
+import com.jjkay03.ninjagomc.utility.NinjagoPlayer
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.entity.Entity
@@ -19,7 +20,7 @@ class EL_Ice : BaseElement() {
         .force(true)
         .allPlayers()
 
-    // Ability 1: Freeze (Freeze entity)
+    // Ability 1: FROSTBITE (Freeze entity)
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
@@ -28,10 +29,10 @@ class EL_Ice : BaseElement() {
         if (event.hand != EquipmentSlot.HAND) { return }
 
         // Check if player has element
-        if (!ElementsUtils.hasElement(player, ElementsID.ICE)) { return }
+        if (!NinjagoPlayer.hasElement(player, ElementsID.ICE)) { return }
 
         // Check if the first slot of the hotbar is selected
-        if (!isHotkeySelected(player, ElementsID.ICE, 1)) { return }
+        if (!isHotkeySelected(player, ElementsID.ICE, AbilitiesID.FROSTBITE.id)) { return }
 
         // Check cooldown and specify cooldown names and durations for the ability
         val cooldownName = "ice_ability_1"

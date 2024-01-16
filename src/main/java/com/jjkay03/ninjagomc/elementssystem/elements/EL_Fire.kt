@@ -1,8 +1,9 @@
 package com.jjkay03.ninjagomc.elementssystem.elements
 
 import com.destroystokyo.paper.ParticleBuilder
+import com.jjkay03.ninjagomc.elementssystem.AbilitiesID
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
-import com.jjkay03.ninjagomc.elementssystem.ElementsUtils
+import com.jjkay03.ninjagomc.utility.NinjagoPlayer
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -22,7 +23,7 @@ class EL_Fire : BaseElement() {
         .force(true)
         .allPlayers()
 
-    // Ability 1: Ignite (Put entities on fire)
+    // Ability 1: IGNITE (Put entities on fire)
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
@@ -31,10 +32,10 @@ class EL_Fire : BaseElement() {
         if (event.hand != EquipmentSlot.HAND) { return }
 
         // Check if player has element
-        if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
+        if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
 
         // Check if the first slot of the hotbar is selected
-        if (!isHotkeySelected(player, ElementsID.FIRE, 1)) { return }
+        if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.IGNITE.id)) { return }
 
         // Play the flint and steel sound
         player.world.playSound(player.location, Sound.ITEM_FLINTANDSTEEL_USE, 1.0f, 1.0f)
@@ -47,7 +48,7 @@ class EL_Fire : BaseElement() {
         entity.fireTicks = 100
     }
 
-    // Ability 1: Ignite (Flint and steel hand)
+    // Ability 1: IGNITE (Flint and steel hand)
     @EventHandler
     fun onRightClickBlock(event: PlayerInteractEvent) {
         val player = event.player
@@ -56,10 +57,10 @@ class EL_Fire : BaseElement() {
         if (event.hand != EquipmentSlot.HAND) { return }
 
         // Check if player has element
-        if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
+        if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
 
         // Check if the first slot of the hotbar is selected
-        if (!isHotkeySelected(player, ElementsID.FIRE, 2)) { return }
+        if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.IGNITE.id)) { return }
 
         // Check if the action is a right-click on a block
         if (event.action == Action.RIGHT_CLICK_BLOCK) {

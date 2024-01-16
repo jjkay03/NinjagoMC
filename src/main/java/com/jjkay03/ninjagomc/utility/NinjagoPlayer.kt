@@ -3,6 +3,7 @@ package com.jjkay03.ninjagomc.utility
 import com.jjkay03.ninjagomc.NinjagoMC
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Player
 import java.io.File
 import java.io.IOException
 import java.util.UUID
@@ -41,6 +42,16 @@ class NinjagoPlayer(val uuid : UUID, val name: String, val elements_list: Mutabl
             PlayerData.playerDataCache.put(uuid, ninjagoPlayerData)
 
             return ninjagoPlayerData
+        }
+
+        // Function that checks if a players has an element
+        fun hasElement(player: Player, element_id: ElementsID): Boolean {
+            val ninjagoPlayer = NinjagoPlayer.get(player.uniqueId)
+            if (ninjagoPlayer.elements_list.contains(element_id)) {
+                return true
+            } else {
+                return false
+            }
         }
     }
 
