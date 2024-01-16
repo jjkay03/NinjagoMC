@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.EquipmentSlot
 
 class EL_Fire : BaseElement() {
 
@@ -21,10 +22,13 @@ class EL_Fire : BaseElement() {
         .force(true)
         .allPlayers()
 
-    // Ability 1: Put entities on fire ability
+    // Ability 1: Ignite (Put entities on fire)
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
+
+        // Check if the event is specifically for the main hand
+        if (event.hand != EquipmentSlot.HAND) { return }
 
         // Check if player has element
         if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }
@@ -43,10 +47,13 @@ class EL_Fire : BaseElement() {
         entity.fireTicks = 100
     }
 
-    // Ability 1: Flint and steel hand ability
+    // Ability 1: Ignite (Flint and steel hand)
     @EventHandler
     fun onRightClickBlock(event: PlayerInteractEvent) {
         val player = event.player
+
+        // Check if the event is specifically for the main hand
+        if (event.hand != EquipmentSlot.HAND) { return }
 
         // Check if player has element
         if (!ElementsUtils.hasElement(player, ElementsID.FIRE)) { return }

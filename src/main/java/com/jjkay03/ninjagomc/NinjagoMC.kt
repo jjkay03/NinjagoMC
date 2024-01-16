@@ -4,7 +4,9 @@ import com.jjkay03.ninjagomc.commands.ElementsCommand
 import com.jjkay03.ninjagomc.commands.ElementsListCommand
 import com.jjkay03.ninjagomc.commands.NinjagoMCCommand
 import com.jjkay03.ninjagomc.commands.SetElementsCommand
+import com.jjkay03.ninjagomc.elementssystem.elements.BaseElement
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Fire
+import com.jjkay03.ninjagomc.elementssystem.elements.EL_Ice
 import com.jjkay03.ninjagomc.utility.PlayerData
 import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
@@ -55,7 +57,8 @@ class NinjagoMC : JavaPlugin() {
 
         // Register event handler
         server.pluginManager.registerEvents(PlayerData(), this)
-        server.pluginManager.registerEvents(EL_Fire(), this)
+        server.pluginManager.registerEvents(EL_Fire(), this) // FIRE
+        server.pluginManager.registerEvents(EL_Ice(), this) // ICE
 
     }
 
