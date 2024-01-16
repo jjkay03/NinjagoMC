@@ -27,6 +27,7 @@ class EL_Fire : BaseElement() {
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
+        val entity: Entity = event.rightClicked
 
         // Check if the event is specifically for the main hand
         if (event.hand != EquipmentSlot.HAND) { return }
@@ -37,14 +38,13 @@ class EL_Fire : BaseElement() {
         // Check if the first slot of the hotbar is selected
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.IGNITE.id)) { return }
 
-        // Play the flint and steel sound
+        // Play sound
         player.world.playSound(player.location, Sound.ITEM_FLINTANDSTEEL_USE, 1.0f, 1.0f)
 
-        // Summon fire particles around the player
+        // Summon particles
         baseFireAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
 
         // Set the entity on fire
-        val entity: Entity = event.rightClicked
         entity.fireTicks = 100
     }
 
@@ -75,10 +75,10 @@ class EL_Fire : BaseElement() {
                         // Check if the target block is air before placing fire block
                         val targetBlock = clickedBlock.getRelative(blockFace)
                         if (targetBlock.type == Material.AIR) {
-                            // Play the flint and steel sound
+                            // Play sound
                             player.world.playSound(player.location, Sound.ITEM_FLINTANDSTEEL_USE, 1.0f, 1.0f)
 
-                            // Place fire particle at the block face
+                            // Summon particles
                             baseFireAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).count(2).spawn()
 
                             // Place fire block

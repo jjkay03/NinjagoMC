@@ -24,6 +24,7 @@ class EL_Ice : BaseElement() {
     @EventHandler
     fun onInteractEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
+        val entity: Entity = event.rightClicked
 
         // Check if the event is specifically for the main hand
         if (event.hand != EquipmentSlot.HAND) { return }
@@ -39,14 +40,14 @@ class EL_Ice : BaseElement() {
         val durationCooldown = 10
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
-        // Play the flint and steel sound
+        // Play sound
         player.world.playSound(player.location, Sound.ENTITY_PLAYER_HURT_FREEZE, 1.0f, 1.0f)
 
-        // Summon fire particles around the player
+        // Summon particles
         baseIceAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
+        baseIceAttackParticles.location(entity.location.add(0.0, 1.0, 0.0)).count(5).spawn()
 
-        // Set the entity on fire
-        val entity: Entity = event.rightClicked
+        // Freeze entity
         entity.freezeTicks = 500
 
         // Update the cooldown for the player
