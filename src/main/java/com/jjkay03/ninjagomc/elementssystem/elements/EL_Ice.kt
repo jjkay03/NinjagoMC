@@ -22,7 +22,7 @@ class EL_Ice : BaseElement() {
 
     // Ability 1: FROSTBITE (Freeze entity)
     @EventHandler
-    fun onInteractEntity(event: PlayerInteractEntityEvent) {
+    fun abilityFrostbite(event: PlayerInteractEntityEvent) {
         val player = event.player
         val entity: Entity = event.rightClicked
 
