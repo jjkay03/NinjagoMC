@@ -32,15 +32,22 @@ open class BaseElement() : Listener{
         val currentTime = System.currentTimeMillis()
 
         // Bypass cooldown permission
-        if (player.hasPermission("ninjagomc.cooldown.bypass")){ return false}
+        if (player.hasPermission("ninjagomc.cooldown.bypass")) { return false }
 
         val durationCooldownMillis = durationCooldownSeconds * 500L
-        val remainingCooldown = (lastUsage + durationCooldownMillis - currentTime) / 1000
-        val onCooldown = currentTime - lastUsage < durationCooldownMillis
+        val remainingCooldownMillis = lastUsage + durationCooldownMillis - currentTime
+        val onCooldown = remainingCooldownMillis > 0
 
         if (onCooldown) {
+            // Convert remaining time to minutes and seconds
+            val remainingMinutes = remainingCooldownMillis / (60 * 1000)
+            val remainingSeconds = (remainingCooldownMillis % (60 * 1000)) / 1000
+
+            // Display remaining time in minutes and seconds if more than 60 seconds
+            val remainingTime = if (remainingMinutes > 0) { "${remainingMinutes}m ${remainingSeconds}s" } else { "${remainingSeconds}s" }
+
             // Send cooldown message to the player with remaining time
-            player.sendActionBar("§c⏳ ${remainingCooldown}s")
+            player.sendActionBar("§c⏳ $remainingTime")
         }
 
         return onCooldown
@@ -48,6 +55,7 @@ open class BaseElement() : Listener{
 
     // Update the cooldown for the player for a specific ability
     fun updateCooldown(player: Player, cooldownName: String, durationCooldownSeconds: Int) {
+        if (player.hasPermission("ninjagomc.cooldown.bypass")) { return } // Bypass cooldown permission
         val durationCooldownMillis = durationCooldownSeconds * 500L
         abilityCooldowns[player.uniqueId.toString() + cooldownName] = System.currentTimeMillis() + durationCooldownMillis
     }

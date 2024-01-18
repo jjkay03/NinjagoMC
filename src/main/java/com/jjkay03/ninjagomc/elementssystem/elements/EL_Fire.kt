@@ -1,32 +1,26 @@
 package com.jjkay03.ninjagomc.elementssystem.elements
 
 import com.destroystokyo.paper.ParticleBuilder
-import com.jjkay03.ninjagomc.NinjagoMC
 import com.jjkay03.ninjagomc.elementssystem.AbilitiesID
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
 import com.jjkay03.ninjagomc.utility.NinjagoPlayer
 import io.papermc.paper.event.player.PlayerArmSwingEvent
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
-import org.bukkit.entity.AbstractArrow
-import org.bukkit.entity.Arrow
 import org.bukkit.entity.Entity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.inventory.EquipmentSlot
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class EL_Fire : BaseElement() {
 
-    private val baseFireAttackParticles = ParticleBuilder(Particle.FLAME)
-        .count(10)
-        .offset(0.5, 0.5, 0.5)
-        .extra(0.0)
-        .force(true)
-        .allPlayers()
+    private val baseFireAttackParticles = ParticleBuilder(Particle.FLAME).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
     // Ability 1: IGNITE (Put entities on fire)
     @EventHandler
@@ -84,7 +78,7 @@ class EL_Fire : BaseElement() {
                             player.world.playSound(player.location, Sound.ITEM_FLINTANDSTEEL_USE, 1.0f, 1.0f)
 
                             // Summon particles
-                            baseFireAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).count(2).spawn()
+                            baseFireAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
 
                             // Place fire block
                             targetBlock.type = Material.FIRE
@@ -129,4 +123,43 @@ class EL_Fire : BaseElement() {
         updateCooldown(player, cooldownName, durationCooldown)
     }
 
+    // Ability 3: FIREPROOF
+    @EventHandler
+    fun onSneakToggle(event: PlayerToggleSneakEvent) {
+        val player = event.player
+
+        // Check if the player is sneaking (going down not up)
+        if (player.isSneaking) { return }
+
+        // Check if player has element
+        if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIREPROOF.id)) { return }
+
+        // Check cooldown
+        val cooldownName = "fire_ability_3"
+        val durationCooldown = 120
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
+        // Play sound
+        player.world.playSound(player.location, Sound.ITEM_FIRECHARGE_USE, 1.0f, 1.0f)
+
+        // Summon particles
+        ParticleBuilder(Particle.WAX_ON)
+            .count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
+            .location(player.location.add(0.0, 1.0, 0.0)).spawn()
+
+        // Apply the fire resistance
+        player.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 1200, 9))
+
+        // If player is on fire
+        if (player.fireTicks > 0) {
+            player.world.playSound(player.location, Sound.ENTITY_GENERIC_EXTINGUISH_FIRE, 1.0f, 1.0f)
+            player.fireTicks = 0
+        }
+
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
+    }
 }

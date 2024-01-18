@@ -10,18 +10,20 @@ api-version: '1.20'
 
 commands:
   ninjagomc:
+    aliases: ["ng"]
     description: "Test if the plugin is running."
     permission: ninjagomc.command.admin
     permission-message: "You don't have permission to use this command!"
   elements:
+    aliases: ["el"]
     description: "List your elements"
     permission: ninjagomc.command.elements
     permission-message: "You don't have permission to use this command!"
   elementslist:
-    description: "List all available elements"
+    aliases: ["ellist"]
     permission: ninjagomc.command.elementslist
     permission-message: "You don't have permission to use this command!"
   setelements:
-    description: "Set a player's elements"
+    aliases: ["setel"]
     permission: ninjagomc.command.admin
     permission-message: "You don't have permission to use this command!"
