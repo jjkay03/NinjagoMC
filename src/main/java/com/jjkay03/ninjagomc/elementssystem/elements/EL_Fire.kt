@@ -5,6 +5,7 @@ import com.jjkay03.ninjagomc.NinjagoMC
 import com.jjkay03.ninjagomc.elementssystem.AbilitiesID
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
 import com.jjkay03.ninjagomc.utility.NinjagoPlayer
+import io.papermc.paper.event.player.PlayerArmSwingEvent
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -96,11 +97,11 @@ class EL_Fire : BaseElement() {
 
     // Ability 2: FIRE SHOT
     @EventHandler
-    fun abilityFireShot(event: PlayerInteractEvent) {
+    fun abilityFireShot(event: PlayerArmSwingEvent) {
         val player = event.player
 
-        // Check if the event is specifically for the main hand and left click air
-        if (event.hand != EquipmentSlot.HAND && event.action == Action.LEFT_CLICK_AIR) { return }
+        // Check if the event is specifically for the main hand and empty
+        if (event.hand != EquipmentSlot.HAND || player.inventory.itemInMainHand.type != Material.AIR) { return }
 
         // Check if player has element
         if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
@@ -108,18 +109,24 @@ class EL_Fire : BaseElement() {
         // Check if the first slot of the hotbar is selected
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIRE_SHOT.id)) { return }
 
+        // Check cooldown
+        val cooldownName = "fire_ability_2"
+        val durationCooldown = 5
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
         // Play sound
         player.world.playSound(player.location, Sound.ENTITY_PLAYER_HURT_ON_FIRE, 1.0f, 1.0f)
 
         // Summon particles
         baseFireAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
 
-        // Arrow
-        val arrow: Arrow = player.launchProjectile(Arrow::class.java)
-        arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.velocity = player.location.direction.multiply(2.0)
-        //Bukkit.getOnlinePlayers().forEach { it.hideEntity(NinjagoMC.instance, arrow) }
+        // Bullet
+        val bulletTrailParticle = ParticleBuilder(Particle.FLAME).count(3).offset(0.1, 0.1, 0.1).extra(0.0).force(true).allPlayers()
+        val bulletLandingParticle = ParticleBuilder(Particle.LAVA).count(5).extra(0.0).force(true).allPlayers()
+        shootBullet(player, bulletTrailParticle,  bulletLandingParticle, ElementsID.FIRE)
 
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
     }
 
 }

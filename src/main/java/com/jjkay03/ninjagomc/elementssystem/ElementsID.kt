@@ -3,7 +3,7 @@ package com.jjkay03.ninjagomc.elementssystem
 enum class ElementsID(val id: String, val label: String, val type: String, val implemented: Boolean) {
     // Elements of creation
     FIRE("FIRE", "§4§lFIRE", "CREATION", true),
-    ICE("ICE", "§f§lICE", "CREATION", false),
+    ICE("ICE", "§f§lICE", "CREATION", true),
     LIGHTNING("LIGHTNING", "§9§lLIGHTNING", "CREATION", false),
     EARTH("EARTH", "§8§lEARTH", "CREATION", false),
 

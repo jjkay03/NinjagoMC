@@ -35,7 +35,7 @@ class EL_Ice : BaseElement() {
         // Check if the first slot of the hotbar is selected
         if (!isHotkeySelected(player, ElementsID.ICE, AbilitiesID.FROSTBITE.id)) { return }
 
-        // Check cooldown and specify cooldown names and durations for the ability
+        // Check cooldown
         val cooldownName = "ice_ability_1"
         val durationCooldown = 10
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }

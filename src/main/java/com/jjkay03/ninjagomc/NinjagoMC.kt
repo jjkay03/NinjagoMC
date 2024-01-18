@@ -15,9 +15,9 @@ import java.io.File
 
 class NinjagoMC : JavaPlugin() {
     companion object {
-        lateinit var instance: NinjagoMC; private set // Define a companion object to hold the instance
-        lateinit var PLAYERDATAFOLDER: File; private set
-        var PREFIX: String = "[NinjagoMC]"; private set
+        lateinit var instance: NinjagoMC // Define a companion object to hold the instance
+        lateinit var PLAYERDATAFOLDER: File
+        var PREFIX: String = "[NinjagoMC]"
     }
 
     // Plugin startup logic
