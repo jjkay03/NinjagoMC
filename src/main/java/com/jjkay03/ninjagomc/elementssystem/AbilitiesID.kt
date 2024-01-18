@@ -6,5 +6,6 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     FIRE_SHOT(2, "Fire Shot", ElementsID.FIRE),
 
     // ICE
-    FROSTBITE(1, "Frostbite", ElementsID.ICE)
+    FROSTBITE(1, "Frostbite", ElementsID.ICE),
+    ICE_SHOT(2, "Ice Shot", ElementsID.ICE)
 }
