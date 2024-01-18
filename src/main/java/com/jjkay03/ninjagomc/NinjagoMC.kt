@@ -1,7 +1,6 @@
 package com.jjkay03.ninjagomc
 
 import com.jjkay03.ninjagomc.commands.*
-import com.jjkay03.ninjagomc.elementssystem.elements.BaseElement
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Fire
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Ice
 import com.jjkay03.ninjagomc.utility.PlayerData
@@ -13,8 +12,10 @@ import java.io.File
 class NinjagoMC : JavaPlugin() {
     companion object {
         lateinit var instance: NinjagoMC // Define a companion object to hold the instance
-        lateinit var PLAYERDATAFOLDER: File
+        lateinit var PLAYER_DATA_FOLDER: File
         var PREFIX: String = "[NinjagoMC]"
+        var RANDOM_ELEMENT: Boolean = false
+        var RANDOM_ELEMENT_DELAY: Int = 0
     }
 
     // Plugin startup logic
@@ -40,10 +41,12 @@ class NinjagoMC : JavaPlugin() {
         reloadConfig() // Reload the configuration
 
         // Create default folders
-        PLAYERDATAFOLDER = File(dataFolder, "player_data"); if (!PLAYERDATAFOLDER.exists()) {PLAYERDATAFOLDER.mkdirs()}
+        PLAYER_DATA_FOLDER = File(dataFolder, "player_data"); if (!PLAYER_DATA_FOLDER.exists()) {PLAYER_DATA_FOLDER.mkdirs()}
 
         // Get config settings
         PREFIX = config.getString("prefix") ?: ""
+        RANDOM_ELEMENT = config.getBoolean("random-element")
+        RANDOM_ELEMENT_DELAY = config.getInt("random-element-delay")
 
         // Get Commands
         getCommand("ninjagomc")?.setExecutor(NinjagoMCCommand())

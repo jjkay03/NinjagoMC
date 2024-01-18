@@ -13,3 +13,11 @@
 # The main prefix for plugin messages
 prefix: "§8[§aNinjago§2MC§8]"
 # -------------------------------------------------------------------------------------------------------
+
+
+# OPTIONS -----------------------------------------------------------------------------------------------
+# Defines if a player with no element gets a random element when joining
+random-element: true
+# Defines after how many seconds the player is given the random element after joining
+random-element-delay: 600
+# -------------------------------------------------------------------------------------------------------

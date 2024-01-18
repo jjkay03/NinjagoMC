@@ -8,10 +8,15 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import com.google.common.cache.Cache
+import com.jjkay03.ninjagomc.elementssystem.ElementsID
+import org.bukkit.Bukkit
+import org.bukkit.Sound
+import org.bukkit.scheduler.BukkitRunnable
 import java.io.File
 import java.io.IOException
 import java.time.Duration
 import java.util.UUID
+import kotlin.random.Random
 
 class PlayerData: Listener {
 
@@ -24,7 +29,7 @@ class PlayerData: Listener {
         // Returns all elements a player has
         fun readElementsList(player: Player): List<String> {
             val uuid = player.uniqueId
-            val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+            val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
 
             if (playerFile.exists()) {
                 val config = YamlConfiguration.loadConfiguration(playerFile)
@@ -47,12 +52,13 @@ class PlayerData: Listener {
         createPlayerYamlFile(player) // Create player data
         updateLastAccountNameKey(player)
         updateDefaultListNullKeys(player, DEFAULT_LIST_NULL_KEYS_LIST)
+        if(NinjagoMC.RANDOM_ELEMENT){assignRandomElement(player, NinjagoMC.RANDOM_ELEMENT_DELAY)}
     }
 
     // Create YAML files for players based on UUID if they don't exist
-    fun createPlayerYamlFile(player: Player) {
+    private fun createPlayerYamlFile(player: Player) {
         val uuid = player.uniqueId
-        val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+        val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
         if (!playerFile.exists()) {
             try {
                 playerFile.createNewFile()
@@ -67,7 +73,7 @@ class PlayerData: Listener {
     // Update last account name in the player's YAML file
     private fun updateLastAccountNameKey(player: Player) {
         val uuid = player.uniqueId
-        val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+        val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
 
         if (playerFile.exists()) {
             val config = YamlConfiguration.loadConfiguration(playerFile)
@@ -95,7 +101,7 @@ class PlayerData: Listener {
     // Update empty keys in the player's YAML file with null if they don't exist
     private fun updateDefaultNullKeys(player: Player, keys: List<String>) {
         val uuid = player.uniqueId
-        val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+        val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
 
         if (playerFile.exists()) {
             val config = YamlConfiguration.loadConfiguration(playerFile)
@@ -126,7 +132,7 @@ class PlayerData: Listener {
     // Update empty list of keys in the player's YAML file with null if they don't exist
     private fun updateDefaultListNullKeys(player: Player, keys: List<String>) {
         val uuid = player.uniqueId
-        val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+        val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
 
         if (playerFile.exists()) {
             val config = YamlConfiguration.loadConfiguration(playerFile)
@@ -148,6 +154,39 @@ class PlayerData: Listener {
                     e.printStackTrace()
                 }
             }
+        }
+    }
+
+    // Assign random element
+    private fun assignRandomElement(player: Player, delaySeconds: Int) {
+        val ninjagoPlayer = NinjagoPlayer.get(player.uniqueId)
+
+        // Check if the player has no elements
+        if (ninjagoPlayer.elements_list.isEmpty()) {
+            object : BukkitRunnable() {
+                override fun run() {
+                    val eligibleElements = ElementsID.values().filter {
+                        it.implemented && it.type != "ESSENCES"
+                    }
+
+                    if (eligibleElements.isNotEmpty()) {
+                        val randomElement = eligibleElements[Random.nextInt(eligibleElements.size)]
+
+                        ninjagoPlayer.elements_list.add(randomElement)
+
+                        val titleText = randomElement.label
+                        val subTitleText = "§7Use this powers wisely"
+                        player.sendTitle(titleText, subTitleText, 10, 40, 10)
+                        player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.5f)
+
+                        // Save the player's data
+                        ninjagoPlayer.save()
+
+                        // Print to console
+                        Bukkit.getLogger().info("Random element ${randomElement.name} assigned to ${player.name}")
+                    }
+                }
+            }.runTaskLater(NinjagoMC.instance, (20L * delaySeconds))
         }
     }
 

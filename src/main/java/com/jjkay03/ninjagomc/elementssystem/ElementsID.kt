@@ -17,7 +17,7 @@ enum class ElementsID(val id: String, val label: String, val type: String, val i
     // Other elements
     AMBER("AMBER", "§e§lAMBER", "OTHER", false),
     FORM("FORM", "§5§lFORM", "OTHER", false),
-    //FUSION("FUSION", "§7§lFUSION", "OTHER", false),
+    FUSION("FUSION", "§1§lFUSION", "OTHER", false),
     GRAVITY("GRAVITY", "§4§lGRAVITY", "OTHER", false),
     HEAT("HEAT", "§c§lHEAT", "OTHER", false),
     LIGHT("LIGHT", "§f§lLIGHT", "OTHER", false),
@@ -32,5 +32,8 @@ enum class ElementsID(val id: String, val label: String, val type: String, val i
     TECHNOLOGY("TECHNOLOGY", "§d§lTECHNOLOGY", "OTHER", false),
     TIME("TIME", "§c§lTIME", "OTHER", false),
     WATER("WATER", "§b§lWATER", "OTHER", false),
-    WIND("WIND", "§2§lWIND", "OTHER", false)
+    WIND("WIND", "§2§lWIND", "OTHER", false),
+
+    // None element
+    NONE("NONE", "§7§lNONE", "NONE", false)
 }

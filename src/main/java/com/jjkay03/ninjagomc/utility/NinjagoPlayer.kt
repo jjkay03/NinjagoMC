@@ -17,7 +17,7 @@ class NinjagoPlayer(val uuid : UUID, val name: String, val elements_list: Mutabl
                 return cachedPlayer
             }
 
-            val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+            val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
             val config = YamlConfiguration.loadConfiguration(playerFile)
             val hotkeys = mutableListOf<Hotkey>()
             for (i in 0..8) {
@@ -57,7 +57,7 @@ class NinjagoPlayer(val uuid : UUID, val name: String, val elements_list: Mutabl
 
     // Save player data to yml and cache
     fun save() {
-        val playerFile = File(NinjagoMC.PLAYERDATAFOLDER, "$uuid.yml")
+        val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
         if (!playerFile.exists()) {
             try {
                 playerFile.createNewFile()
