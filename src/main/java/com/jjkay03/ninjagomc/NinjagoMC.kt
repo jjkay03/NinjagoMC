@@ -1,9 +1,6 @@
 package com.jjkay03.ninjagomc
 
-import com.jjkay03.ninjagomc.commands.ElementsCommand
-import com.jjkay03.ninjagomc.commands.ElementsListCommand
-import com.jjkay03.ninjagomc.commands.NinjagoMCCommand
-import com.jjkay03.ninjagomc.commands.SetElementsCommand
+import com.jjkay03.ninjagomc.commands.*
 import com.jjkay03.ninjagomc.elementssystem.elements.BaseElement
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Fire
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Ice
@@ -54,6 +51,7 @@ class NinjagoMC : JavaPlugin() {
         getCommand("elementslist")?.setExecutor(ElementsListCommand())
         getCommand("setelements")?.setExecutor(SetElementsCommand())
         getCommand("setelements")?.tabCompleter = SetElementsCommand() // Tab completer
+        getCommand("ninjagomcwiki")?.setExecutor(NinjagoMCWikiCommand())
 
         // Register event handler
         server.pluginManager.registerEvents(PlayerData(), this)

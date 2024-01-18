@@ -5,8 +5,10 @@ authors: [jjkay03]
 description: Ninjago elemantal powers in Minecraft
 website: https://jjkay03.com/
 
+
 main: com.jjkay03.ninjagomc.NinjagoMC
 api-version: '1.20'
+
 
 commands:
   ninjagomc:
@@ -14,16 +16,25 @@ commands:
     description: "Test if the plugin is running."
     permission: ninjagomc.command.admin
     permission-message: "You don't have permission to use this command!"
+
   elements:
     aliases: ["el"]
     description: "List your elements"
     permission: ninjagomc.command.elements
     permission-message: "You don't have permission to use this command!"
+
   elementslist:
     aliases: ["ellist"]
     permission: ninjagomc.command.elementslist
     permission-message: "You don't have permission to use this command!"
+
   setelements:
     aliases: ["setel"]
     permission: ninjagomc.command.admin
+    permission-message: "You don't have permission to use this command!"
+
+  ninjagomcwiki:
+    aliases: [ "ngwiki" ]
+    description: "Give you a link to the NinjagoMC Wiki."
+    permission: ninjagomc.command.ninjagomcwiki
     permission-message: "You don't have permission to use this command!"

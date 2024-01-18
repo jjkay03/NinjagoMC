@@ -22,9 +22,9 @@ class EL_Fire : BaseElement() {
 
     private val baseFireAttackParticles = ParticleBuilder(Particle.FLAME).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
-    // Ability 1: IGNITE (Put entities on fire)
+    // Ability 1: IGNITE (Entity)
     @EventHandler
-    fun abilityIgnite1(event: PlayerInteractEntityEvent) {
+    fun abilityIgniteEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
         val entity: Entity = event.rightClicked
 
@@ -47,9 +47,9 @@ class EL_Fire : BaseElement() {
         entity.fireTicks = 100
     }
 
-    // Ability 1: IGNITE (Flint and steel hand)
+    // Ability 1: IGNITE (Block)
     @EventHandler
-    fun abilityIgnite2(event: PlayerInteractEvent) {
+    fun abilityIgniteBlock(event: PlayerInteractEvent) {
         val player = event.player
 
         // Check if the event is specifically for the main hand

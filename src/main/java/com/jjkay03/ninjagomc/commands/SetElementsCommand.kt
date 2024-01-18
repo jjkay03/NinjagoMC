@@ -4,10 +4,12 @@ import com.jjkay03.ninjagomc.NinjagoMC
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
 import com.jjkay03.ninjagomc.utility.NinjagoPlayer
 import org.bukkit.Bukkit
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
+import org.bukkit.entity.Player
 
 class SetElementsCommand: CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>?): Boolean {
@@ -26,6 +28,14 @@ class SetElementsCommand: CommandExecutor, TabCompleter {
         else if (ElementsID.entries.any{it.id == args.get(1).uppercase()}) {
             ninjagoPlayer.elements_list.add(ElementsID.valueOf(args.get(1).uppercase()))
             sender.sendMessage("${NinjagoMC.PREFIX} §aAdded ${ninjagoPlayer.elements_list.last().label} §aelement to ${player.name}")
+
+            // Send message to player getting element
+            if (player.isOnline) {
+                val titleText = ninjagoPlayer.elements_list.last().label
+                val subTitleText = "§7Use this powers wisely"
+                player.player?.sendTitle(titleText, subTitleText, 10, 60, 10)
+                player.player?.playSound(player.player!!.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.5f)
+            }
         }
         else
             sender.sendMessage("${NinjagoMC.PREFIX} §cInvalid element ID!")
