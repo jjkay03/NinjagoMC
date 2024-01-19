@@ -15,7 +15,7 @@ class ElementsListCommand : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
-            sender.sendMessage("${NinjagoMC.PREFIX} §a§nELEMENTS LIST:")
+            sender.sendMessage("${NinjagoMC.PREFIX}§a§nELEMENTS LIST:")
 
             ElementsID.entries.forEach { element ->
                 val implementedStatus = if (element.implemented) ChatColor.GREEN.toString() + "✔" else ChatColor.RED.toString() + "❌"

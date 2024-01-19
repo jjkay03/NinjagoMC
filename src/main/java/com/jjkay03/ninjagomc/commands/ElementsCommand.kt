@@ -30,15 +30,15 @@ class ElementsCommand : CommandExecutor {
 
                     if (playerElements.isNotEmpty()) {
                         val elementLabels = playerElements.map { it.label }
-                        sender.sendMessage("${NinjagoMC.PREFIX} §7Elements of ${targetPlayer.name}: ${elementLabels.joinToString("§7, ")}")
+                        sender.sendMessage("${NinjagoMC.PREFIX}§7Elements of ${targetPlayer.name}: ${elementLabels.joinToString("§7, ")}")
                     } else {
-                        sender.sendMessage("${NinjagoMC.PREFIX} §cNo matching elements found for ${targetPlayer.name}!")
+                        sender.sendMessage("${NinjagoMC.PREFIX}§cNo matching elements found for ${targetPlayer.name}!")
                     }
                 } else {
-                    sender.sendMessage("${NinjagoMC.PREFIX} §c${targetPlayer.name} has no elements!")
+                    sender.sendMessage("${NinjagoMC.PREFIX}§c${targetPlayer.name} has no elements!")
                 }
             } ?: run {
-                sender.sendMessage("${NinjagoMC.PREFIX} §cPlayer not found!")
+                sender.sendMessage("${NinjagoMC.PREFIX}§cPlayer not found!")
             }
         } else {
             sender.sendMessage("§cOnly players can execute this command")

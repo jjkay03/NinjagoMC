@@ -18,18 +18,20 @@ commands:
     permission-message: "You don't have permission to use this command!"
 
   elements:
-    aliases: ["el"]
-    description: "List your elements"
+    aliases: ["ninjagoelements", "ngelements", "el"]
+    description: "List your elements."
     permission: ninjagomc.command.elements
     permission-message: "You don't have permission to use this command!"
 
   elementslist:
-    aliases: ["ellist"]
+    aliases: ["ninjagoelementslist", "ngelementslist", "ellist"]
+    description: "List all elements."
     permission: ninjagomc.command.elementslist
     permission-message: "You don't have permission to use this command!"
 
   setelements:
-    aliases: ["setel"]
+    aliases: ["ninjagosetelements", "ngsetelements", "setel"]
+    description: "Set the elements of a player."
     permission: ninjagomc.command.admin
     permission-message: "You don't have permission to use this command!"
 
@@ -37,4 +39,10 @@ commands:
     aliases: [ "ngwiki" ]
     description: "Give you a link to the NinjagoMC Wiki."
     permission: ninjagomc.command.ninjagomcwiki
+    permission-message: "You don't have permission to use this command!"
+
+  bind:
+    aliases: [ "ninjagobind", "ngbind" ]
+    description: "Allows you bind element abilities."
+    permission: ninjagomc.command.bind
     permission-message: "You don't have permission to use this command!"

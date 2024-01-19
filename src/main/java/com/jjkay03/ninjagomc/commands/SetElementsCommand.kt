@@ -14,7 +14,7 @@ import org.bukkit.entity.Player
 class SetElementsCommand: CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>?): Boolean {
         if (args == null || args.size < 2){
-            sender.sendMessage("${NinjagoMC.PREFIX} §cUsage: /setelements <PLAYER> <ELEMENT ID / CLEAR>")
+            sender.sendMessage("${NinjagoMC.PREFIX}§cUsage: /setelements <PLAYER> <ELEMENT ID / CLEAR>")
             return true
         }
 
@@ -23,11 +23,11 @@ class SetElementsCommand: CommandExecutor, TabCompleter {
 
         if (args.get(1).lowercase() == "clear"){
             ninjagoPlayer.elements_list.clear()
-            sender.sendMessage("${NinjagoMC.PREFIX} §aCleared all of ${player.name}'s elements")
+            sender.sendMessage("${NinjagoMC.PREFIX}§aCleared all of ${player.name}'s elements")
         }
         else if (ElementsID.entries.any{it.id == args.get(1).uppercase()}) {
             ninjagoPlayer.elements_list.add(ElementsID.valueOf(args.get(1).uppercase()))
-            sender.sendMessage("${NinjagoMC.PREFIX} §aAdded ${ninjagoPlayer.elements_list.last().label} §aelement to ${player.name}")
+            sender.sendMessage("${NinjagoMC.PREFIX}§aAdded ${ninjagoPlayer.elements_list.last().label} §aelement to ${player.name}")
 
             // Send message to player getting element
             if (player.isOnline) {
@@ -38,7 +38,7 @@ class SetElementsCommand: CommandExecutor, TabCompleter {
             }
         }
         else
-            sender.sendMessage("${NinjagoMC.PREFIX} §cInvalid element ID!")
+            sender.sendMessage("${NinjagoMC.PREFIX}§cInvalid element ID!")
 
         ninjagoPlayer.save()
 
