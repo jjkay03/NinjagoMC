@@ -14,7 +14,7 @@ import org.bukkit.entity.Player
 class SetElementsCommand: CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>?): Boolean {
         if (args == null || args.size < 2){
-            sender.sendMessage("${NinjagoMC.PREFIX}§cUsage: /setelements <PLAYER> <ELEMENT ID / CLEAR>")
+            sender.sendMessage("${NinjagoMC.PREFIX}§cUsage: /setelements <PLAYER> <ELEMENT / CLEAR>")
             return true
         }
 

@@ -55,6 +55,8 @@ class NinjagoMC : JavaPlugin() {
         getCommand("setelements")?.setExecutor(SetElementsCommand())
         getCommand("setelements")?.tabCompleter = SetElementsCommand() // Tab completer
         getCommand("ninjagomcwiki")?.setExecutor(NinjagoMCWikiCommand())
+        getCommand("bind")?.setExecutor(BindCommand())
+        getCommand("bind")?.tabCompleter = BindCommand() // Tab completer
 
         // Register event handler
         server.pluginManager.registerEvents(PlayerData(), this)
