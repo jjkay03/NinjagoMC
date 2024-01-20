@@ -21,7 +21,7 @@ class SetElementsCommand: CommandExecutor, TabCompleter {
         val player = Bukkit.getOfflinePlayer(args.first())
         val ninjagoPlayer = NinjagoPlayer.get(player.uniqueId)
 
-        if (args.get(1).lowercase() == "clear"){
+        if (args.get(1).uppercase() == "CLEAR"){
             ninjagoPlayer.elements_list.clear()
             sender.sendMessage("${NinjagoMC.PREFIX}§aCleared all of ${player.name}'s elements")
         }
@@ -56,7 +56,7 @@ class SetElementsCommand: CommandExecutor, TabCompleter {
                 }
                 .toMutableList()
         else if (args.size < 3) {
-            val elementList = mutableListOf("clear")
+            val elementList = mutableListOf("CLEAR")
             elementList.addAll(ElementsID.entries.map { it.toString() }.toMutableList())
             return elementList.filter { it.lowercase().startsWith(args[1].lowercase()) }
         } else mutableListOf()

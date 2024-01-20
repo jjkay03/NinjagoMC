@@ -54,15 +54,11 @@ class BindCommand : CommandExecutor, TabCompleter {
                 return true
             }
 
-            // Get the player's currently selected hotbar slot
-            val hotbarSlot = player.inventory.heldItemSlot
-
             // Update the hotkey_list with the new Hotkey instance
+            val hotbarSlot = player.inventory.heldItemSlot
             ninjagoPlayer.hotkey_list[hotbarSlot] = NinjagoPlayer.Hotkey(element, ability.id)
 
-            // Inform the player about the successful binding
-            val shortLabel = element.label.take(2)
-            sender.sendMessage("${NinjagoMC.PREFIX}§aBound ${element.label}§r$shortLabel: ${ability.label} §ato your selected hotbar slot (${hotbarSlot + 1})")
+            sender.sendMessage("${NinjagoMC.PREFIX}§aBound ${element.label}§r${element.label.take(2)}: ${ability.label} §ato your selected hotbar slot (${hotbarSlot + 1})")
         }
 
         // Save the player data
