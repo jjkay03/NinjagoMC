@@ -15,12 +15,7 @@ import org.bukkit.inventory.EquipmentSlot
 
 class EL_Ice : BaseElement() {
 
-    private val baseIceAttackParticles = ParticleBuilder(Particle.SNOWFLAKE)
-        .count(10)
-        .offset(0.5, 0.5, 0.5)
-        .extra(0.0)
-        .force(true)
-        .allPlayers()
+    private val baseIceAttackParticles = ParticleBuilder(Particle.SNOWFLAKE).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
     // Ability 1: FROSTBITE (Freeze entity)
     @EventHandler

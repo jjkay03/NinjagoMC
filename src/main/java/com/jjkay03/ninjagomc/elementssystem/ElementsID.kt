@@ -4,7 +4,7 @@ enum class ElementsID(val id: String, val label: String, val type: String, val i
     // Elements of creation
     FIRE("FIRE", "§4§lFIRE", "CREATION", true),
     ICE("ICE", "§f§lICE", "CREATION", true),
-    LIGHTNING("LIGHTNING", "§9§lLIGHTNING", "CREATION", false),
+    LIGHTNING("LIGHTNING", "§9§lLIGHTNING", "CREATION", true),
     EARTH("EARTH", "§8§lEARTH", "CREATION", false),
 
     // Elements of essences
