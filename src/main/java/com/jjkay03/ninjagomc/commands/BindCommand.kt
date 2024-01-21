@@ -3,6 +3,7 @@ package com.jjkay03.ninjagomc.commands
 import com.jjkay03.ninjagomc.NinjagoMC
 import com.jjkay03.ninjagomc.elementssystem.AbilitiesID
 import com.jjkay03.ninjagomc.utility.NinjagoPlayer
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -59,6 +60,7 @@ class BindCommand : CommandExecutor, TabCompleter {
             ninjagoPlayer.hotkey_list[hotbarSlot] = NinjagoPlayer.Hotkey(element, ability.id)
 
             sender.sendMessage("${NinjagoMC.PREFIX}§aBound ${element.label}§r${element.label.take(2)}: ${ability.label} §ato your selected hotbar slot (${hotbarSlot + 1})")
+            sender.playSound(sender, Sound.BLOCK_END_PORTAL_FRAME_FILL, 0.8f, 1.0f)
         }
 
         // Save the player data
