@@ -13,13 +13,13 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
 
-class EL_LIGHTNING : BaseElement() {
+class EL_Lightning : BaseElement() {
 
     private val baseLightningAttackParticles = ParticleBuilder(Particle.ELECTRIC_SPARK).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
     // Ability 1: SMITE
     @EventHandler
-    fun abilityIceShot(event: PlayerArmSwingEvent) {
+    fun abilityLightning(event: PlayerArmSwingEvent) {
         val player = event.player
 
         // Check if the event is specifically for the main hand and empty

@@ -3,7 +3,8 @@ package com.jjkay03.ninjagomc
 import com.jjkay03.ninjagomc.commands.*
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Fire
 import com.jjkay03.ninjagomc.elementssystem.elements.EL_Ice
-import com.jjkay03.ninjagomc.elementssystem.elements.EL_LIGHTNING
+import com.jjkay03.ninjagomc.elementssystem.elements.EL_Lightning
+import com.jjkay03.ninjagomc.elementssystem.elements.EL_Water
 import com.jjkay03.ninjagomc.utility.PlayerData
 import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
@@ -63,7 +64,8 @@ class NinjagoMC : JavaPlugin() {
         server.pluginManager.registerEvents(PlayerData(), this)
         server.pluginManager.registerEvents(EL_Fire(), this) // FIRE
         server.pluginManager.registerEvents(EL_Ice(), this) // ICE
-        server.pluginManager.registerEvents(EL_LIGHTNING(), this) // LIGHTNING
+        server.pluginManager.registerEvents(EL_Lightning(), this) // LIGHTNING
+        server.pluginManager.registerEvents(EL_Water(), this) // WATER
 
     }
 

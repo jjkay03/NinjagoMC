@@ -125,7 +125,7 @@ class EL_Fire : BaseElement() {
 
     // Ability 3: FIREPROOF
     @EventHandler
-    fun onSneakToggle(event: PlayerToggleSneakEvent) {
+    fun abilityFirreproof(event: PlayerToggleSneakEvent) {
         val player = event.player
 
         // Check if the player is sneaking (going down not up)

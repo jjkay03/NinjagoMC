@@ -31,7 +31,7 @@ enum class ElementsID(val id: String, val label: String, val type: String, val i
     SPEED("SPEED", "§f§lSPEED", "OTHER", false),
     TECHNOLOGY("TECHNOLOGY", "§d§lTECHNOLOGY", "OTHER", false),
     TIME("TIME", "§c§lTIME", "OTHER", false),
-    WATER("WATER", "§b§lWATER", "OTHER", false),
+    WATER("WATER", "§b§lWATER", "OTHER", true),
     WIND("WIND", "§2§lWIND", "OTHER", false),
 
     // None element
