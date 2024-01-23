@@ -54,7 +54,6 @@ class EL_Water : BaseElement() {
     }
 
     // Ability 2: WATER SHOT
-    // TODO: CHANGE ABILITY USE SOUND AND ADD MORE PARTICLES TO TRAIL!
     @EventHandler
     fun abilityFireShot(event: PlayerArmSwingEvent) {
         val player = event.player
@@ -74,13 +73,13 @@ class EL_Water : BaseElement() {
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
         // Play sound
-        player.world.playSound(player.location, Sound.ENTITY_DROWNED_DEATH_WATER, 1.0f, 1.0f)
+        player.world.playSound(player.location, Sound.BLOCK_BUBBLE_COLUMN_UPWARDS_INSIDE, 1.0f, 1.0f)
 
         // Summon particles
         baseWaterAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
 
         // Bullet
-        val bulletTrailParticle = ParticleBuilder(Particle.WATER_SPLASH).count(3).offset(0.1, 0.1, 0.1).extra(0.0).force(true).allPlayers()
+        val bulletTrailParticle = ParticleBuilder(Particle.WATER_SPLASH).count(10).offset(0.1, 0.1, 0.1).extra(0.0).force(true).allPlayers()
         val bulletLandingParticle = ParticleBuilder(Particle.BUBBLE_POP).count(5).extra(0.0).force(true).allPlayers()
         shootBullet(player, bulletTrailParticle,  bulletLandingParticle, ElementsID.WATER)
 

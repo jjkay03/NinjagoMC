@@ -22,7 +22,34 @@ class EL_Fire : BaseElement() {
 
     private val baseFireAttackParticles = ParticleBuilder(Particle.FLAME).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
-    // Ability 1: IGNITE (Entity)
+    // Ability 1: SPINJITZU
+    @EventHandler
+    fun abilityFireSpinjitzu(event: PlayerToggleSneakEvent) {
+        val player = event.player
+
+        // Check if the player is sneaking (going down not up)
+        if (player.isSneaking) { return }
+
+        // Check if player has element
+        if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIRE_SPINJITZU.id)) { return }
+
+        // Check cooldown
+        val cooldownName = "fire_ability_1"
+        val durationCooldown = 120
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
+        // Spinjitzu
+        spinjitzu(player, 10, Particle.FLAME)
+
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
+    }
+
+
+    // Ability 2: IGNITE (Entity)
     @EventHandler
     fun abilityIgniteEntity(event: PlayerInteractEntityEvent) {
         val player = event.player
@@ -47,7 +74,7 @@ class EL_Fire : BaseElement() {
         entity.fireTicks = 100
     }
 
-    // Ability 1: IGNITE (Block)
+    // Ability 2: IGNITE (Block)
     @EventHandler
     fun abilityIgniteBlock(event: PlayerInteractEvent) {
         val player = event.player
@@ -89,7 +116,7 @@ class EL_Fire : BaseElement() {
         }
     }
 
-    // Ability 2: FIRE SHOT
+    // Ability 3: FIRE SHOT
     @EventHandler
     fun abilityFireShot(event: PlayerArmSwingEvent) {
         val player = event.player
@@ -104,7 +131,7 @@ class EL_Fire : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIRE_SHOT.id)) { return }
 
         // Check cooldown
-        val cooldownName = "fire_ability_2"
+        val cooldownName = "fire_ability_3"
         val durationCooldown = 5
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
@@ -123,7 +150,7 @@ class EL_Fire : BaseElement() {
         updateCooldown(player, cooldownName, durationCooldown)
     }
 
-    // Ability 3: FIREPROOF
+    // Ability 4: FIREPROOF
     @EventHandler
     fun abilityFirreproof(event: PlayerToggleSneakEvent) {
         val player = event.player
@@ -138,7 +165,7 @@ class EL_Fire : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIREPROOF.id)) { return }
 
         // Check cooldown
-        val cooldownName = "fire_ability_3"
+        val cooldownName = "fire_ability_4"
         val durationCooldown = 120
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 

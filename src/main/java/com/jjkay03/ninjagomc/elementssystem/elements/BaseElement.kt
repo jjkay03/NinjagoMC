@@ -5,17 +5,21 @@ import com.jjkay03.ninjagomc.NinjagoMC
 import com.jjkay03.ninjagomc.elementssystem.ElementsID
 import com.jjkay03.ninjagomc.utility.NinjagoPlayer
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.Particle
 import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
+import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.scheduler.BukkitTask
+import kotlin.math.cos
+import kotlin.math.sin
 
 open class BaseElement() : Listener{
 
-    // Map to track player cooldowns (player UUID to last usage time)
-    private val abilityCooldowns = mutableMapOf<String, Long>()
+    private val abilityCooldowns = mutableMapOf<String, Long>() // Cooldowns map
+    private var spinjitzuPoint = 0
 
     // Checks selected hotkeys
     fun isHotkeySelected(player: Player, elementsID: ElementsID, ability: Int) : Boolean {
@@ -84,6 +88,43 @@ open class BaseElement() : Listener{
                 trailParticle.location(arrow.location).spawn()
             }
         }, 0L, 1L)
+    }
+
+    // Spinjitzu
+    fun spinjitzu(player: Player, duration: Int, particle: Particle) {
+        val tickDuration = duration * 20
+
+        object : BukkitRunnable() {
+            var ticks = 0
+
+            override fun run() {
+                if (ticks >= tickDuration) {
+                    cancel()
+                    return
+                }
+
+                // Spawn spinning tornado particles around the player
+                spinjitzuParticleTornado(player, particle, 2f, 4)
+                spinjitzuParticleTornado(player, particle, 2.5f, 4)
+                spinjitzuParticleTornado(player, particle, 3f, 4)
+
+                ticks++
+            }
+        }.runTaskTimer(NinjagoMC.instance, 0L, 1L)
+    }
+
+    // Summon tornado of particles around a player
+    fun spinjitzuParticleTornado(player: Player, particle: Particle, radius: Float, particlesPerTick: Int) {
+        val location = player.location.clone()
+
+        for (i in 0 until particlesPerTick) {
+            val particleLocation: Location = location.clone()
+            particleLocation.add(radius * cos(spinjitzuPoint.toDouble()), 1.0, radius * sin(spinjitzuPoint.toDouble()))
+
+            spinjitzuPoint++
+            if (spinjitzuPoint > 360) spinjitzuPoint = 0
+            location.world.spawnParticle(particle, particleLocation, 0, 0.0, 0.0, 0.0, 0.0)
+        }
     }
 
 }
