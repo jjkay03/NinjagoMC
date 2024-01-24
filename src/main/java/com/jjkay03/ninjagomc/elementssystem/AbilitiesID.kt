@@ -16,6 +16,9 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     LIGHTNING_SPINJITZU(1, "Spinjitzu", ElementsID.LIGHTNING),
     SMITE(2, "Smite", ElementsID.LIGHTNING),
 
+    // EARTH
+    EARTH_SPINJITZU(1, "Spinjitzu", ElementsID.EARTH),
+
     // WATER
     MERMAID(1, "Mermaid", ElementsID.WATER),
     WATER_SHOT(2, "Water Shot", ElementsID.WATER)
