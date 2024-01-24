@@ -57,6 +57,8 @@ class NinjagoMC : JavaPlugin() {
         getCommand("ninjagomcwiki")?.setExecutor(NinjagoMCWikiCommand())
         getCommand("bind")?.setExecutor(BindCommand())
         getCommand("bind")?.tabCompleter = BindCommand() // Tab completer
+        getCommand("ninjagomcdisplay")?.setExecutor(NinjagoMCDisplay())
+        getCommand("ninjagomcdisplay")?.tabCompleter = NinjagoMCDisplay() // Tab completer
 
         // Register event handler
         server.pluginManager.registerEvents(HotkeyDisplay(), this)

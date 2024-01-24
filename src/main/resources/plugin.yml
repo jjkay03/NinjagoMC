@@ -36,3 +36,7 @@ commands:
   bind:
     aliases: [ "ninjagobind", "ngbind" ]
     description: "Allows you bind element abilities."
+
+  ninjagomcdisplay:
+    aliases: [ "ngdisplay" ]
+    description: "Toggle abilities display types."

@@ -17,7 +17,9 @@ class HotkeyDisplay : Listener {
 
         // Check if the selected hotbar slot has a bound ability
         val hotkey: NinjagoPlayer.Hotkey = ninjagoPlayer.hotkey_list[selectedSlot]
-        if (hotkey.ability != null) {
+
+        // Check if display-actionbar is set to true
+        if (ninjagoPlayer.displayActionbar && hotkey.ability != null) {
             // Find the ability with the given id
             val ability: AbilitiesID? = AbilitiesID.entries.find { it.id == hotkey.ability && it.elementsID == hotkey.element }
 

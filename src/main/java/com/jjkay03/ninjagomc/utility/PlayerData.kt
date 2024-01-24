@@ -24,7 +24,6 @@ class PlayerData: Listener {
         const val ELEMENTS_LIST_KEY = "elements-list"
         const val HOTKEY_LIST_KEY = "hotkey-list"
         private val DEFAULT_LIST_NULL_KEYS_LIST = listOf(ELEMENTS_LIST_KEY)
-        private val DEFAULT_NULL_KEYS_LIST = listOf("exemple-key", "exemple-key")
 
         // Returns all elements a player has
         fun readElementsList(player: Player): List<String> {
@@ -51,6 +50,7 @@ class PlayerData: Listener {
         val player = event.player
         createPlayerYamlFile(player) // Create player data
         updateLastAccountNameKey(player)
+        updateDefaultKeys(player)
         updateDefaultListNullKeys(player, DEFAULT_LIST_NULL_KEYS_LIST)
         if(NinjagoMC.RANDOM_ELEMENT){assignRandomElement(player, NinjagoMC.RANDOM_ELEMENT_DELAY)}
     }
@@ -95,6 +95,34 @@ class PlayerData: Listener {
                     }
                 }
             }
+        }
+    }
+
+    // Update default keys
+    private fun updateDefaultKeys(player: Player) {
+        val uuid = player.uniqueId
+        val playerFile = File(NinjagoMC.PLAYER_DATA_FOLDER, "$uuid.yml")
+
+        try {
+            val config = YamlConfiguration.loadConfiguration(playerFile)
+
+            // Update keys
+            val defaultKeys = listOf("display-actionbar", "display-scoreboard")
+
+            for (key in defaultKeys) {
+                if (!config.contains(key)) {
+                    // Key doesn't exist, create it and set it to default value
+                    when (key) {
+                        "display-actionbar" -> config.set(key, true)
+                        "display-scoreboard" -> config.set(key, false)
+                    }
+                }
+            }
+
+            // Save the updated configuration
+            config.save(playerFile)
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
