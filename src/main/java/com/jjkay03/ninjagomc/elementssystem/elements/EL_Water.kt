@@ -33,7 +33,7 @@ class EL_Water : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.WATER, AbilitiesID.MERMAID.id)) { return }
 
         // Check cooldown
-        val cooldownName = "water_ability_1"
+        val cooldownName = AbilitiesID.MERMAID.toString()
         val durationCooldown = 480
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
@@ -68,7 +68,7 @@ class EL_Water : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.WATER, AbilitiesID.WATER_SHOT.id)) { return }
 
         // Check cooldown
-        val cooldownName = "water_ability_2"
+        val cooldownName = AbilitiesID.WATER_SHOT.toString()
         val durationCooldown = 5
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 

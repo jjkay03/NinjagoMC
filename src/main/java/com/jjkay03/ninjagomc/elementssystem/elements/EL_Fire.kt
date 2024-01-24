@@ -37,17 +37,16 @@ class EL_Fire : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIRE_SPINJITZU.id)) { return }
 
         // Check cooldown
-        val cooldownName = "fire_ability_1"
-        val durationCooldown = 120
+        val cooldownName = AbilitiesID.FIRE_SPINJITZU.toString()
+        val durationCooldown = 600
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
         // Spinjitzu
-        spinjitzu(player, 10, Particle.FLAME)
+        spinjitzu(player, 30, 2.0, Particle.FLAME, ElementsID.FIRE)
 
         // Update the cooldown for the player
         updateCooldown(player, cooldownName, durationCooldown)
     }
-
 
     // Ability 2: IGNITE (Entity)
     @EventHandler
@@ -131,7 +130,7 @@ class EL_Fire : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIRE_SHOT.id)) { return }
 
         // Check cooldown
-        val cooldownName = "fire_ability_3"
+        val cooldownName = AbilitiesID.FIRE_SHOT.toString()
         val durationCooldown = 5
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
@@ -165,7 +164,7 @@ class EL_Fire : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIREPROOF.id)) { return }
 
         // Check cooldown
-        val cooldownName = "fire_ability_4"
+        val cooldownName = AbilitiesID.FIREPROOF.toString()
         val durationCooldown = 120
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
@@ -178,7 +177,7 @@ class EL_Fire : BaseElement() {
             .location(player.location.add(0.0, 1.0, 0.0)).spawn()
 
         // Apply the fire resistance
-        player.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 1200, 9))
+        player.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 1200, 9, false, false))
 
         // If player is on fire
         if (player.fireTicks > 0) {

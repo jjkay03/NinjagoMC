@@ -9,6 +9,7 @@ import io.papermc.paper.event.player.PlayerArmSwingEvent
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.event.EventHandler
+import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
@@ -17,7 +18,33 @@ class EL_Lightning : BaseElement() {
 
     private val baseLightningAttackParticles = ParticleBuilder(Particle.ELECTRIC_SPARK).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
-    // Ability 1: SMITE
+    // Ability 1: SPINJITZU
+    @EventHandler
+    fun abilityIceSpinjitzu(event: PlayerToggleSneakEvent) {
+        val player = event.player
+
+        // Check if the player is sneaking (going down not up)
+        if (player.isSneaking) { return }
+
+        // Check if player has element
+        if (!NinjagoPlayer.hasElement(player, ElementsID.LIGHTNING)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (!isHotkeySelected(player, ElementsID.LIGHTNING, AbilitiesID.LIGHTNING_SPINJITZU.id)) { return }
+
+        // Check cooldown
+        val cooldownName = AbilitiesID.LIGHTNING_SPINJITZU.toString()
+        val durationCooldown = 600
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
+        // Spinjitzu
+        spinjitzu(player, 30, 2.0, Particle.ELECTRIC_SPARK, ElementsID.LIGHTNING)
+
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
+    }
+
+    // Ability 2: SMITE
     @EventHandler
     fun abilityLightning(event: PlayerArmSwingEvent) {
         val player = event.player
@@ -32,7 +59,7 @@ class EL_Lightning : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.LIGHTNING, AbilitiesID.SMITE.id)) { return }
 
         // Check cooldown
-        val cooldownName = "lightning_ability_1"
+        val cooldownName = AbilitiesID.SMITE.toString()
         val durationCooldown = 30
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 

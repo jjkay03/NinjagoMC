@@ -11,13 +11,40 @@ import org.bukkit.Sound
 import org.bukkit.entity.Entity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractEntityEvent
+import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.inventory.EquipmentSlot
 
 class EL_Ice : BaseElement() {
 
     private val baseIceAttackParticles = ParticleBuilder(Particle.SNOWFLAKE).count(10).offset(0.5, 0.5, 0.5).extra(0.0).force(true).allPlayers()
 
-    // Ability 1: FROSTBITE (Freeze entity)
+    // Ability 1: SPINJITZU
+    @EventHandler
+    fun abilityIceSpinjitzu(event: PlayerToggleSneakEvent) {
+        val player = event.player
+
+        // Check if the player is sneaking (going down not up)
+        if (player.isSneaking) { return }
+
+        // Check if player has element
+        if (!NinjagoPlayer.hasElement(player, ElementsID.ICE)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (!isHotkeySelected(player, ElementsID.ICE, AbilitiesID.FIRE_SPINJITZU.id)) { return }
+
+        // Check cooldown
+        val cooldownName = AbilitiesID.FIRE_SPINJITZU.toString()
+        val durationCooldown = 600
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
+        // Spinjitzu
+        spinjitzu(player, 30, 2.0, Particle.SNOWFLAKE, ElementsID.ICE)
+
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
+    }
+
+    // Ability 2: FROSTBITE (Freeze entity)
     @EventHandler
     fun abilityFrostbite(event: PlayerInteractEntityEvent) {
         val player = event.player
@@ -33,7 +60,7 @@ class EL_Ice : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.ICE, AbilitiesID.FROSTBITE.id)) { return }
 
         // Check cooldown
-        val cooldownName = "ice_ability_1"
+        val cooldownName = AbilitiesID.FROSTBITE.toString()
         val durationCooldown = 10
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 
@@ -51,7 +78,7 @@ class EL_Ice : BaseElement() {
         updateCooldown(player, cooldownName, durationCooldown)
     }
 
-    // Ability 2: ICE SHOT
+    // Ability 3: ICE SHOT
     @EventHandler
     fun abilityIceShot(event: PlayerArmSwingEvent) {
         val player = event.player
@@ -66,7 +93,7 @@ class EL_Ice : BaseElement() {
         if (!isHotkeySelected(player, ElementsID.ICE, AbilitiesID.ICE_SHOT.id)) { return }
 
         // Check cooldown
-        val cooldownName = "ice_ability_2"
+        val cooldownName = AbilitiesID.ICE_SHOT.toString()
         val durationCooldown = 3
         if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
 

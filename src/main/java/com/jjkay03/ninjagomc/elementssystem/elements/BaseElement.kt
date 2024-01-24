@@ -9,8 +9,11 @@ import org.bukkit.Location
 import org.bukkit.Particle
 import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.scheduler.BukkitTask
 import kotlin.math.cos
@@ -71,7 +74,7 @@ open class BaseElement() : Listener{
         arrow.velocity = player.location.direction.multiply(2.0) // Shoot arrow
 
         //Element specific
-        if (elementsID == ElementsID.FIRE) { arrow.fireTicks = Int.MAX_VALUE } // Set arrow on fire
+        if (elementsID == ElementsID.FIRE) { arrow.fireTicks = Int.MAX_VALUE } // Fire element
 
         // Make arrow invisible
         Bukkit.getOnlinePlayers().forEach { it.hideEntity(NinjagoMC.instance, arrow) }
@@ -91,8 +94,12 @@ open class BaseElement() : Listener{
     }
 
     // Spinjitzu
-    fun spinjitzu(player: Player, duration: Int, particle: Particle) {
+    fun spinjitzu(player: Player, duration: Int, damage: Double, particle: Particle, elementsID: ElementsID) {
         val tickDuration = duration * 20
+
+        // Apply effects
+        player.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 1, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 400, 4, false, false))
 
         object : BukkitRunnable() {
             var ticks = 0
@@ -104,9 +111,31 @@ open class BaseElement() : Listener{
                 }
 
                 // Spawn spinning tornado particles around the player
-                spinjitzuParticleTornado(player, particle, 2f, 4)
-                spinjitzuParticleTornado(player, particle, 2.5f, 4)
-                spinjitzuParticleTornado(player, particle, 3f, 4)
+                spinjitzuParticleTornado(player, particle, 2f, 1f, 4)
+                spinjitzuParticleTornado(player, particle, 2.5f, 1f, 4)
+                spinjitzuParticleTornado(player, particle, 2.5f, 0.5f, 4)
+                spinjitzuParticleTornado(player, particle, 2.5f, 1.5f, 4)
+                spinjitzuParticleTornado(player, particle, 3f, 1f, 4)
+
+                // Damage
+                if (ticks % 20 == 0) {
+                    val damageRadius = 3.0
+                    val entities = player.getNearbyEntities(damageRadius, damageRadius, damageRadius)
+                    for (entity in entities) {
+                        if (entity is LivingEntity && entity !== player) {
+                            // You can adjust the damage amount as needed
+                            entity.damage(damage, player)
+
+                            // Element-specific
+                            when (elementsID) {
+                                ElementsID.FIRE -> entity.fireTicks = 100 // Fire element
+                                ElementsID.ICE -> entity.freezeTicks = 500 // Ice element
+                                ElementsID.LIGHTNING -> entity.world.strikeLightningEffect(entity.location) // Lightning element
+                                else -> { TODO() } // Handle other cases here
+                            }
+                        }
+                    }
+                }
 
                 ticks++
             }
@@ -114,12 +143,12 @@ open class BaseElement() : Listener{
     }
 
     // Summon tornado of particles around a player
-    fun spinjitzuParticleTornado(player: Player, particle: Particle, radius: Float, particlesPerTick: Int) {
+    fun spinjitzuParticleTornado(player: Player, particle: Particle, radius: Float, height: Float, particlesPerTick: Int) {
         val location = player.location.clone()
 
         for (i in 0 until particlesPerTick) {
             val particleLocation: Location = location.clone()
-            particleLocation.add(radius * cos(spinjitzuPoint.toDouble()), 1.0, radius * sin(spinjitzuPoint.toDouble()))
+            particleLocation.add(radius * cos(spinjitzuPoint.toDouble()), height.toDouble(), radius * sin(spinjitzuPoint.toDouble()))
 
             spinjitzuPoint++
             if (spinjitzuPoint > 360) spinjitzuPoint = 0

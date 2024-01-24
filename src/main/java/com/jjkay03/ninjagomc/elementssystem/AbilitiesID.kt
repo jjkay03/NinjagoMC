@@ -8,11 +8,13 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     FIREPROOF(4, "Fireproof", ElementsID.FIRE),
 
     // ICE
-    FROSTBITE(1, "Frostbite", ElementsID.ICE),
-    ICE_SHOT(2, "Ice Shot", ElementsID.ICE),
+    ICE_SPINJITZU(1, "Spinjitzu", ElementsID.ICE),
+    FROSTBITE(2, "Frostbite", ElementsID.ICE),
+    ICE_SHOT(3, "Ice Shot", ElementsID.ICE),
 
     // LIGHTNING
-    SMITE(1, "Smite", ElementsID.LIGHTNING),
+    LIGHTNING_SPINJITZU(1, "Spinjitzu", ElementsID.LIGHTNING),
+    SMITE(2, "Smite", ElementsID.LIGHTNING),
 
     // WATER
     MERMAID(1, "Mermaid", ElementsID.WATER),
