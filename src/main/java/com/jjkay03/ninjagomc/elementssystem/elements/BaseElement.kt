@@ -131,11 +131,14 @@ open class BaseElement() : Listener{
                                 ElementsID.FIRE -> entity.fireTicks = 100 // Fire element
                                 ElementsID.ICE -> entity.freezeTicks = 500 // Ice element
                                 ElementsID.LIGHTNING -> entity.world.strikeLightningEffect(entity.location) // Lightning element
-                                else -> { TODO() } // Handle other cases here
+                                else -> {} // Other elements
                             }
                         }
                     }
                 }
+
+                // Cancel loop if player dies
+                if (player.isDead) { cancel() }
 
                 ticks++
             }

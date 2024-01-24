@@ -2,6 +2,7 @@ package com.jjkay03.ninjagomc
 
 import com.jjkay03.ninjagomc.commands.*
 import com.jjkay03.ninjagomc.elementssystem.elements.*
+import com.jjkay03.ninjagomc.utility.HotkeyDisplay
 import com.jjkay03.ninjagomc.utility.PlayerData
 import org.bukkit.Bukkit
 import org.bukkit.command.ConsoleCommandSender
@@ -58,7 +59,9 @@ class NinjagoMC : JavaPlugin() {
         getCommand("bind")?.tabCompleter = BindCommand() // Tab completer
 
         // Register event handler
+        server.pluginManager.registerEvents(HotkeyDisplay(), this)
         server.pluginManager.registerEvents(PlayerData(), this)
+        // Elements
         server.pluginManager.registerEvents(EL_Fire(), this) // FIRE
         server.pluginManager.registerEvents(EL_Ice(), this) // ICE
         server.pluginManager.registerEvents(EL_Lightning(), this) // LIGHTNING
