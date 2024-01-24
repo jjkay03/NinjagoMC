@@ -6,7 +6,7 @@
 
     <groupId>com.jjkay03</groupId>
     <artifactId>NinjagoMC</artifactId>
-    <version>1.0</version>
+    <version>ALPHA-0.1</version>
     <packaging>jar</packaging>
 
     <name>NinjagoMC</name>
