@@ -16,15 +16,15 @@ commands:
     description: "Test if the plugin is running."
 
   elements:
-    aliases: ["ninjagoelements", "ngelements", "el"]
+    aliases: ["ninjagomcelements", "ngelements", "el"]
     description: "List your elements."
 
   elementslist:
-    aliases: ["ninjagoelementslist", "ngelementslist", "ellist"]
+    aliases: ["ninjagomcelementslist", "ngelementslist", "ellist"]
     description: "List all elements."
 
   setelements:
-    aliases: ["ninjagosetelements", "ngsetelements", "setel"]
+    aliases: ["ninjagomcsetelements", "ngsetelements", "setel"]
     description: "Set the elements of a player."
     permission: ninjagomc.admin.setelements
     permission-message: "You don't have permission to use this command!"
@@ -34,7 +34,7 @@ commands:
     description: "Give you a link to the NinjagoMC Wiki."
 
   bind:
-    aliases: [ "ninjagobind", "ngbind" ]
+    aliases: [ "ninjagomcbind", "ngbind" ]
     description: "Allows you bind element abilities."
 
   ninjagomcdisplay:
