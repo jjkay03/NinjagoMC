@@ -68,6 +68,7 @@ class NinjagoMC : JavaPlugin() {
         server.pluginManager.registerEvents(EL_Ice(), this) // ICE
         server.pluginManager.registerEvents(EL_Lightning(), this) // LIGHTNING
         server.pluginManager.registerEvents(EL_Earth(), this) // EARTH
+        server.pluginManager.registerEvents(EL_Energy(), this) // ENERGY
         server.pluginManager.registerEvents(EL_Water(), this) // WATER
 
     }
