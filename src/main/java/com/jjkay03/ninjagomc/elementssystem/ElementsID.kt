@@ -5,13 +5,13 @@ enum class ElementsID(val id: String, val label: String, val type: String, val i
     FIRE("FIRE", "§4§lFIRE", "CREATION", true),
     ICE("ICE", "§f§lICE", "CREATION", true),
     LIGHTNING("LIGHTNING", "§9§lLIGHTNING", "CREATION", true),
-    EARTH("EARTH", "§8§lEARTH", "CREATION", false),
+    EARTH("EARTH", "§8§lEARTH", "CREATION", true),
 
     // Elements of essences
     CREATION("CREATION", "§e§lCREATION", "ESSENCES", false),
     DARKNESS("DARKNESS", "§0§lDARKNESS", "ESSENCES", false),
     DESTRUCTION("DESTRUCTION", "§5§lDESTRUCTION", "ESSENCES", false),
-    ENERGY("ENERGY", "§2§lENERGY", "ESSENCES", false),
+    ENERGY("ENERGY", "§2§lENERGY", "ESSENCES", true),
     GOLDEN_POWER("GOLDEN_POWER", "§6§lGOLDEN POWER", "ESSENCES", false),
 
     // Other elements
