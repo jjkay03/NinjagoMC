@@ -73,8 +73,12 @@ open class BaseElement() : Listener{
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED // Can't pick up arrow
         arrow.velocity = player.location.direction.multiply(2.0) // Shoot arrow
 
-        //Element specific
-        if (elementsID == ElementsID.FIRE) { arrow.fireTicks = Int.MAX_VALUE } // Fire element
+        // Element specific
+        when (elementsID) {
+            ElementsID.FIRE -> arrow.fireTicks = Int.MAX_VALUE // Fire element
+            ElementsID.ENERGY -> arrow.addCustomEffect(PotionEffect(PotionEffectType.CONFUSION, 100, 0, false, false), true) // Energy element
+            else -> {} // Other elements
+        }
 
         // Make arrow invisible
         Bukkit.getOnlinePlayers().forEach { it.hideEntity(NinjagoMC.instance, arrow) }
