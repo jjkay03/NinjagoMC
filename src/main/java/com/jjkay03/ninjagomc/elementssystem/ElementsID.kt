@@ -1,6 +1,7 @@
 package com.jjkay03.ninjagomc.elementssystem
 
 enum class ElementsID(val id: String, val label: String, val type: String, val implemented: Boolean) {
+
     // Elements of creation
     FIRE("FIRE", "§4§lFIRE", "CREATION", true),
     ICE("ICE", "§f§lICE", "CREATION", true),
@@ -36,4 +37,5 @@ enum class ElementsID(val id: String, val label: String, val type: String, val i
 
     // None element
     NONE("NONE", "§7§lNONE", "NONE", false)
+
 }

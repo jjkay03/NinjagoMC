@@ -11,6 +11,8 @@ import org.bukkit.Sound
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.inventory.EquipmentSlot
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class EL_Energy: BaseElement() {
 
@@ -42,7 +44,7 @@ class EL_Energy: BaseElement() {
         updateCooldown(player, cooldownName, durationCooldown)
     }
 
-    // Ability 3: ENERGY SHOT
+    // Ability 2: ENERGY SHOT
     @EventHandler
     fun abilityEnergyShot(event: PlayerArmSwingEvent) {
         val player = event.player
@@ -76,4 +78,37 @@ class EL_Energy: BaseElement() {
         updateCooldown(player, cooldownName, durationCooldown)
     }
 
+    // Ability 3: ENERGY_CHARGE
+    @EventHandler
+    fun abilityEnergyCharge(event: PlayerToggleSneakEvent) {
+        val player = event.player
+
+        // Check if the player is sneaking (going down not up)
+        if (player.isSneaking) { return }
+
+        // Check if player has element
+        if (!NinjagoPlayer.hasElement(player, ElementsID.ENERGY)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (!isHotkeySelected(player, ElementsID.ENERGY, AbilitiesID.ENERGY_CHARGE.id)) { return }
+
+        // Check cooldown
+        val cooldownName = AbilitiesID.ENERGY_CHARGE.toString()
+        val durationCooldown = 300
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
+        // Play sound
+        player.world.playSound(player.location, Sound.ENTITY_SHULKER_BULLET_HURT, 1.0f, 1.0f)
+
+        // Summon particles
+        baseEnergyAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
+
+        // Apply the fire resistance
+        player.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 200, 0, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1200, 1, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 1200, 4, false, false))
+
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
+    }
 }

@@ -11,7 +11,7 @@ import java.io.File
 
 class NinjagoMC : JavaPlugin() {
     companion object {
-        lateinit var instance: NinjagoMC // Define a companion object to hold the instance
+        lateinit var instance: NinjagoMC
         lateinit var PLAYER_DATA_FOLDER: File
         var PREFIX: String = "[NinjagoMC]"
         var RANDOM_ELEMENT: Boolean = false

@@ -1,6 +1,7 @@
 package com.jjkay03.ninjagomc.elementssystem
 
 enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsID) {
+
     // FIRE
     FIRE_SPINJITZU(1, "Spinjitzu", ElementsID.FIRE),
     IGNITE(2, "Ignite", ElementsID.FIRE),
@@ -22,8 +23,10 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     // ENERGY
     ENERGY_SPINJITZU(1, "Spinjitzu", ElementsID.ENERGY),
     ENERGY_SHOT(2, "Energy Shot", ElementsID.ENERGY),
+    ENERGY_CHARGE(3, "Energy Charge", ElementsID.ENERGY),
 
     // WATER
     MERMAID(1, "Mermaid", ElementsID.WATER),
     WATER_SHOT(2, "Water Shot", ElementsID.WATER)
+
 }
