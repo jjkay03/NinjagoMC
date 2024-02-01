@@ -9,6 +9,7 @@ import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.entity.Entity
+import org.bukkit.entity.Fireball
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEntityEvent
@@ -184,6 +185,40 @@ class EL_Fire : BaseElement() {
             player.world.playSound(player.location, Sound.ENTITY_GENERIC_EXTINGUISH_FIRE, 1.0f, 1.0f)
             player.fireTicks = 0
         }
+
+        // Update the cooldown for the player
+        updateCooldown(player, cooldownName, durationCooldown)
+    }
+
+    // Ability 5: FIREBALL
+    @EventHandler
+    fun abilityFireball(event: PlayerArmSwingEvent) {
+        val player = event.player
+
+        // Check if the event is specifically for the main hand
+        if (event.hand != EquipmentSlot.HAND) { return }
+
+        // Check if player has element
+        if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
+
+        // Check if the first slot of the hotbar is selected
+        if (!isHotkeySelected(player, ElementsID.FIRE, AbilitiesID.FIREBALL.id)) { return }
+
+        // Check cooldown
+        val cooldownName = AbilitiesID.FIREBALL.toString()
+        val durationCooldown = 120
+        if (isOnCooldown(player, cooldownName, durationCooldown)) { return }
+
+        // Play sound
+        player.world.playSound(player.location, Sound.ENTITY_ENDER_DRAGON_SHOOT, 1.0f, 1.0f)
+
+        // Summon particles
+        baseFireAttackParticles.location(player.location.add(0.0, 1.0, 0.0)).spawn()
+
+        // Shoot fireball
+        val fireball: Fireball = player.launchProjectile(Fireball::class.java)
+        fireball.velocity = player.location.direction.multiply(2.0)
+        fireball.shooter = player
 
         // Update the cooldown for the player
         updateCooldown(player, cooldownName, durationCooldown)
