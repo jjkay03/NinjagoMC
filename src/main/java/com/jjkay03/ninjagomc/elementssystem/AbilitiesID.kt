@@ -7,6 +7,7 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     IGNITE(2, "Ignite", ElementsID.FIRE),
     FIRE_SHOT(3, "Fire Shot", ElementsID.FIRE),
     FIREPROOF(4, "Fireproof", ElementsID.FIRE),
+    FIREBALL(5, "Fireball", ElementsID.FIRE),
 
     // ICE
     ICE_SPINJITZU(1, "Spinjitzu", ElementsID.ICE),

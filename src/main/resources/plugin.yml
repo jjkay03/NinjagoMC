@@ -2,7 +2,7 @@ name: NinjagoMC
 version: '${project.version}'
 prefix: NinjagoMC
 authors: [jjkay03]
-description: Ninjago elemantal powers in Minecraft
+description: Ninjago elemental powers in Minecraft
 website: https://jjkay03.com/
 
 

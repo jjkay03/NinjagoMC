@@ -120,8 +120,8 @@ class EL_Fire : BaseElement() {
     fun abilityFireShot(event: PlayerArmSwingEvent) {
         val player = event.player
 
-        // Check if the event is specifically for the main hand and empty
-        if (event.hand != EquipmentSlot.HAND || player.inventory.itemInMainHand.type != Material.AIR) { return }
+        // Check if the event is specifically for the main hand
+        if (event.hand != EquipmentSlot.HAND) { return }
 
         // Check if player has element
         if (!NinjagoPlayer.hasElement(player, ElementsID.FIRE)) { return }
@@ -188,4 +188,6 @@ class EL_Fire : BaseElement() {
         // Update the cooldown for the player
         updateCooldown(player, cooldownName, durationCooldown)
     }
+
+
 }
