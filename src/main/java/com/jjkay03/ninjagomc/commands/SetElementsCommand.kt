@@ -29,6 +29,11 @@ class SetElementsCommand: CommandExecutor, TabCompleter {
             ninjagoPlayer.elements_list.add(ElementsID.valueOf(args.get(1).uppercase()))
             sender.sendMessage("${NinjagoMC.PREFIX}§aAdded ${ninjagoPlayer.elements_list.last().label} §aelement to ${player.name}")
 
+            // Play sound if target is different from sender
+            if (sender is Player && sender.uniqueId != player.uniqueId) {
+                sender.playSound(sender.location, Sound.BLOCK_END_PORTAL_FRAME_FILL, 1.0f, 1.0f)
+            }
+
             // Send message to player getting element
             if (player.isOnline) {
                 val titleText = ninjagoPlayer.elements_list.last().label
