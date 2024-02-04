@@ -30,7 +30,7 @@ class NinjagoMC : JavaPlugin() {
         console.sendMessage("§a  /  \\/ / | '_ \\ | |/ _` |/ _` |/ _ \\ /    \\  / /        ")
         console.sendMessage("§a / /\\  /| | | | || | (_| | (_| | (_) / /\\/\\ \\/ /___      ")
         console.sendMessage("§a \\_\\ \\/ |_|_| |_|/ |\\__,_|\\__, |\\___/\\/    \\/\\____/ ")
-        console.sendMessage("§a               |__/       |___/")
+        console.sendMessage("§a               |__/       |___/                              ")
         console.sendMessage("")
 
         // Display plugin version
