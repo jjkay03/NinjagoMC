@@ -8,6 +8,7 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     FIRE_SHOT(3, "Fire Shot", ElementsID.FIRE),
     FIREPROOF(4, "Fireproof", ElementsID.FIRE),
     FIREBALL(5, "Fireball", ElementsID.FIRE),
+    // TODO: BURN
 
     // ICE
     ICE_SPINJITZU(1, "Spinjitzu", ElementsID.ICE),
@@ -17,9 +18,13 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     // LIGHTNING
     LIGHTNING_SPINJITZU(1, "Spinjitzu", ElementsID.LIGHTNING),
     SMITE(2, "Smite", ElementsID.LIGHTNING),
+    // TODO: THUNDER
+    // TODO: THUNDER STORM
+    // TODO: STORM
 
     // EARTH
     EARTH_SPINJITZU(1, "Spinjitzu", ElementsID.EARTH),
+    // TODO: EARTH SHAKE
 
     // ENERGY
     ENERGY_SPINJITZU(1, "Spinjitzu", ElementsID.ENERGY),
@@ -29,5 +34,6 @@ enum class AbilitiesID(val id: Int, val label: String, val elementsID: ElementsI
     // WATER
     MERMAID(1, "Mermaid", ElementsID.WATER),
     WATER_SHOT(2, "Water Shot", ElementsID.WATER)
+    // TODO: WATERSPOUT
 
 }
